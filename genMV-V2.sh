@@ -1,10 +1,10 @@
 #Variable
 NOM_VM="Debian1"
-VM_EXIST=$(vboxmanage list vms | grep "\"$NOM_VM\"" | wc -l)
+VM_EXIST=$(vboxmanage list vms | grep "$NOM_VM" | wc -l)
 
 if [ "$VM_EXIST" -ne 0 ]; then
-    echo "[INFO] La machine $NOM_VM existe déjà. Suppression..."
-    VBoxManage unregistervm "$NOM_VM" --delete
+    echo "La machine $NOM_VM existe déjà."
+    exit
 fi
 
 vboxmanage createvm --name="Debian1" --ostype="Debian_64" --register
@@ -15,3 +15,4 @@ vboxmanage storagectl "Debian1" --name "SATA Controller" --add sata --controller
 vboxmanage storageattach "Debian1" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "$HOME/VirtualBox VMs/Debian1/Debian1.vdi"
 
 virtualbox
+exit
