@@ -1,4 +1,4 @@
-# SAE 51 – Automatisation de la création de machines VirtualBox
+# SAE 52 – Automatisation de la création de machines VirtualBox
 
 **Auteurs :** Tom MERKEL & Mickaël DAMERVAL  
 **Date :** 11 Septembre 2025  
