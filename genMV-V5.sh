@@ -25,10 +25,15 @@ if [ "$arg1" = "L" ]; then
     fi
 
 elif [ "$arg1" = "N" ]; then
+    if [ -z "$arg2" ]; then
+        echo "Veuillez nommer la VM s'il vous plaît."
+        exit
+    fi
     if vboxmanage list vms | grep -q "$arg2"; then
         echo "La VM $arg2 existe déjà."
         exit
     fi
+    
 
     vboxmanage createvm --name="$arg2" --ostype="Debian_64" --register
     vboxmanage modifyvm "$arg2" --memory "$ram" --cpus 2 --vram 64
@@ -44,10 +49,18 @@ elif [ "$arg1" = "N" ]; then
     virtualbox
 
 elif [ "$arg1" = "S" ]; then
+    if [ -z "$arg2" ]; then
+        echo "Veuillez nommer la VM s'il vous plaît."
+        exit
+    fi
     vboxmanage unregistervm "$arg2" --delete
     virtualbox
 
 elif [ "$arg1" = "D" ]; then
+    if [ -z "$arg2" ]; then
+        echo "Veuillez nommer la VM s'il vous plaît."
+        exit
+    fi
     if [ $(vboxmanage list vms | grep "$arg2" | wc -l) = 0 ]; then
         echo "La VM $arg2 n'existe pas."
         exit
@@ -55,6 +68,10 @@ elif [ "$arg1" = "D" ]; then
     vboxmanage startvm "$arg2" --type gui
 
 elif [ "$arg1" = "A" ]; then
+    if [ -z "$arg2" ]; then
+        echo "Veuillez nommer la VM s'il vous plaît."
+        exit
+    fi
     if [ $(vboxmanage list vms | grep "$arg2" | wc -l) = 0 ]; then
         echo "La VM $arg2 n'existe pas."
         exit
